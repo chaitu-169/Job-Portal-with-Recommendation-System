@@ -5,6 +5,7 @@ import { FaCheck } from "react-icons/fa6";
 import { RxCross2 } from "react-icons/rx";
 import { Context } from "../../main";
 import { useNavigate } from "react-router-dom";
+import API from "../../api"; // change path if needed
 
 const MyJobs = () => {
   const [myJobs, setMyJobs] = useState([]);
@@ -24,7 +25,7 @@ const MyJobs = () => {
     const fetchJobs = async () => {
       try {
         const token = localStorage.getItem("jwtToken"); // Get the token from local storage
-        const { data } = await axios.get("http://localhost:4000/api/v1/job/getmyjobs", {
+        const { data } = await API.get("/job/getmyjobs", {
           headers: {
             Authorization: `Bearer ${token}`, // Add JWT token to headers
           },
@@ -54,8 +55,8 @@ const MyJobs = () => {
     const updatedJob = myJobs.find((job) => job._id === jobId);
     try {
       const token = localStorage.getItem("jwtToken"); // Get the token from local storage
-      const { data } = await axios.put(
-        `http://localhost:4000/api/v1/job/update/${jobId}`,
+      const { data } = await API.put(
+        `/job/update/${jobId}`,
         updatedJob,
         {
           headers: {
@@ -75,7 +76,7 @@ const MyJobs = () => {
   const handleDeleteJob = async (jobId) => {
     try {
       const token = localStorage.getItem("jwtToken"); // Get the token from local storage
-      const { data } = await axios.delete(`http://localhost:4000/api/v1/job/delete/${jobId}`, {
+      const { data } = await API.delete(`/job/delete/${jobId}`, {
         headers: {
           Authorization: `Bearer ${token}`, // Add JWT token to headers
         },

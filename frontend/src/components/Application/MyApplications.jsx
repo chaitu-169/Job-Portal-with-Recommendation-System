@@ -4,6 +4,8 @@ import axios from "axios";
 import toast from "react-hot-toast";
 import { useNavigate } from "react-router-dom";
 import ResumeModal from "./ResumeModal";
+import API from "../../api"; // change path if needed
+
 
 const MyApplications = () => {
   const { user } = useContext(Context);
@@ -19,8 +21,8 @@ const MyApplications = () => {
   
     try {
       if (user && user.role === "Employer") {
-        axios
-          .get("http://localhost:4000/api/v1/application/employer/getall", {
+        API
+          .get("/application/employer/getall", {
             withCredentials: true,
             headers: {
               "Authorization": `Bearer ${token}`,  // Add Authorization header
@@ -30,8 +32,8 @@ const MyApplications = () => {
             setApplications(res.data.applications);
           });
       } else {
-        axios
-          .get("http://localhost:4000/api/v1/application/jobseeker/getall", {
+        API
+          .get("/application/jobseeker/getall", {
             withCredentials: true,
             headers: {
               "Authorization": `Bearer ${token}`,  // Add Authorization header
@@ -49,8 +51,8 @@ const MyApplications = () => {
   const deleteApplication = (id) => {
     const token = localStorage.getItem("token"); // Get token from localStorage
     try {
-      axios
-        .delete(`http://localhost:4000/api/v1/application/delete/${id}`, {
+      API
+        .delete(`/application/delete/${id}`, {
           withCredentials: true,
           headers: {
             "Authorization": `Bearer ${token}`,  // Add Authorization header

@@ -3,6 +3,7 @@ import React, { useContext, useEffect, useState } from "react";
 import toast from "react-hot-toast";
 import { useNavigate, useParams } from "react-router-dom";
 import { Context } from "../../main";
+import API from "../../api"; // change path if needed
 
 const Application = () => {
   const [name, setName] = useState("");
@@ -41,8 +42,8 @@ const Application = () => {
     try {
       const token = localStorage.getItem("jwtToken");
 
-      const { data } = await axios.post(
-        "http://localhost:4000/api/v1/application/post",
+      const { data } = await API.post(
+        "/application/post",
         formData,
         {
           withCredentials: true,

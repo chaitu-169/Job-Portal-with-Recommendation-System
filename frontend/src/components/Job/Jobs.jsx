@@ -2,6 +2,7 @@ import React, { useContext, useEffect, useState } from "react";
 import axios from "axios";
 import { Link, useNavigate } from "react-router-dom";
 import { Context } from "../../main";
+import API from "../../api"; // change path if needed
 
 const Jobs = () => {
   const [jobs, setJobs] = useState([]);
@@ -15,8 +16,8 @@ const Jobs = () => {
 
     const token = localStorage.getItem("jwtToken"); // or get from context
 
-    axios
-      .get("http://localhost:4000/api/v1/job/getall", {
+    API
+      .get("/job/getall", {
         headers: {
           Authorization: `Bearer ${token}`,
         },

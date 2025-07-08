@@ -3,6 +3,8 @@ import axios from "axios";
 import toast from "react-hot-toast";
 import { useNavigate } from "react-router-dom";
 import { Context } from "../../main";
+import API from "../../api"; // change path if needed
+
 const PostJob = () => {
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
@@ -29,9 +31,9 @@ const PostJob = () => {
       setSalaryTo("");
       setFixedSalary("");
     }
-    await axios
+    await API
       .post(
-        "http://localhost:4000/api/v1/job/post",
+        "/job/post",
         fixedSalary.length >= 4
           ? {
               title,

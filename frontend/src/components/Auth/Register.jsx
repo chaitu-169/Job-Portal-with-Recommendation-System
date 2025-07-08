@@ -8,6 +8,7 @@ import { Link, Navigate } from "react-router-dom";
 import axios from "axios";
 import toast from "react-hot-toast";
 import { Context } from "../../main";
+import API from "../../api"; // change path if needed
 
 const Register = () => {
   const [email, setEmail] = useState("");
@@ -21,8 +22,8 @@ const Register = () => {
   const handleRegister = async (e) => {
     e.preventDefault();
     try {
-      const { data } = await axios.post(
-        "http://localhost:4000/api/v1/user/register",
+      const { data } = await API.post(
+        "/user/register",
         { name, phone, email, role, password },
         {
           headers: {

@@ -3,6 +3,7 @@ import { Link, useParams } from "react-router-dom";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import { Context } from "../../main";
+import API from "../../api"; // change path if needed
 
 const JobDetails = () => {
   const { id } = useParams();
@@ -18,8 +19,8 @@ const JobDetails = () => {
       navigateTo("/login");
     }
 
-    axios
-      .get(`http://localhost:4000/api/v1/job/${id}`, {
+    API
+      .get(`/job/${id}`, {
         headers: {
           Authorization: `Bearer ${token}`,
         },
