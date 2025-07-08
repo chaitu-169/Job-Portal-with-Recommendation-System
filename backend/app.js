@@ -12,11 +12,19 @@ import fileUpload from "express-fileupload";
 const app = express();
 config({ path: "./config/config.env" });
 
+const allowedOrigins = process.env.FRONTEND_URL?.split(",") || [];
+
 app.use(
   cors({
-    origin: process.env.FRONTEND_URL.split(","), 
-    methods: ["GET", "POST", "DELETE", "PUT"],
+    origin: function (origin, callback) {
+      if (!origin || allowedOrigins.includes(origin)) {
+        callback(null, true);
+      } else {
+        callback(new Error("Not allowed by CORS: " + origin));
+      }
+    },
     credentials: true,
+    methods: ["GET", "POST", "PUT", "DELETE"],
   })
 );
 
