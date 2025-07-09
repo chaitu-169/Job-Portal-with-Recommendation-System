@@ -13,7 +13,11 @@ nltk.download('stopwords')
 BASE_DIR = os.path.dirname(__file__)
 clf_path = os.path.join(BASE_DIR, 'clf.pkl')
 tfidf_path = os.path.join(BASE_DIR, 'tfidf.pkl')
+with open(clf_path, 'rb') as f:
+    clf = pickle.load(f)
 
+with open(tfidf_path, 'rb') as f:
+    tfidf = pickle.load(f)
 
 def clean_resume(txt):
     cleanText = re.sub(r'http\S+\s', ' ', txt)  # Raw string to avoid warnings
@@ -38,7 +42,7 @@ def main():
             resume_text = resume_bytes.decode('latin-1')
 
         cleaned_resume = clean_resume(resume_text)
-        input_features = tfidfd.transform([cleaned_resume])
+        input_features = tfidf.transform([cleaned_resume])
         prediction_id = clf.predict(input_features)[0]
         st.write(prediction_id)
 
