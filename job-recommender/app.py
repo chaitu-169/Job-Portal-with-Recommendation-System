@@ -2,13 +2,18 @@ import streamlit as st
 import pickle
 import re
 import nltk
+import os
 
 nltk.download('punkt')
 nltk.download('stopwords')
 
-#loading models
-clf = pickle.load(open('clf.pkl','rb'))
-tfidfd = pickle.load(open('tfidf.pkl','rb'))
+
+
+# Get absolute paths
+BASE_DIR = os.path.dirname(__file__)
+clf_path = os.path.join(BASE_DIR, 'clf.pkl')
+tfidf_path = os.path.join(BASE_DIR, 'tfidf.pkl')
+
 
 def clean_resume(txt):
     cleanText = re.sub(r'http\S+\s', ' ', txt)  # Raw string to avoid warnings
