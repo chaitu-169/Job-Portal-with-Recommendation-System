@@ -67,7 +67,7 @@ const Navbar = () => {
             </>
           ) : null}
           <li>
-          <a href="http://localhost:8501" target="_blank" rel="noopener noreferrer">
+          <a href="https://job-app-with-recommendation-system-ggfaatvbo5ahzpwaa6ub6d.streamlit.app/" target="_blank" rel="noopener noreferrer">
             JOB RECOMMENDER
           </a>
         </li>
